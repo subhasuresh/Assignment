@@ -38,7 +38,7 @@ class User(AbstractBaseUser):
     Extends the default User profiles of Django. The fields of this model can be obtained by the
     user.get_profile method and it's extended by the django-profile application.
     """
-    user_id = models.AutoField(primary_key=True)
+    user_id =models.AutoField(primary_key=True)
     user_first_name = models.CharField(_('First Name'), max_length=32, blank=True, null=True,
                                   validators=[RegexValidator(regex='^[A-Za-z]*$')])
     user_last_name = models.CharField(_('Last Name'), max_length=32, blank=True, null=True,
@@ -139,3 +139,14 @@ class Course(models.Model):
 
     def __unicode__(self):
         return self.course_name
+
+
+class Chocolate(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(_('Chocolate Name'), max_length=100, blank=True)
+    description = models.CharField(_('Chocolate Description'), max_length=1000, blank=True)
+    manufacturer = models.CharField(_('Chocolate Manufacturer'), max_length=100, blank=True)
+    price = models.IntegerField(_('Chocolate Price'),
+                                validators=[MaxValueValidator(1000), MinValueValidator(0)],
+                                help_text=_('4 digits maximum'), blank=True, null=True)
+

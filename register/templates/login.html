@@ -1,5 +1,5 @@
 
-
+{% load register_extras %}
 {%  load staticfiles %}
 
 <html>
@@ -30,89 +30,37 @@
 
         <div class="panel-body">
 
-            <form role="form" action="{% url 'login' %}" method="POST">
 
-                {% csrf_token %}
+<form class="form-horizontal well" id="registerForm" method="POST"
+          					enctype="multipart/form-data" action="">
+          					<fieldset>
+          							{% csrf_token %} {% load tz %}
+          							{% for field in form.visible_fields %}
+          							<div id="div_{{ field.html_name }}"
+          									class="form-group{% if field.errors %} has-error{% endif%}">
+          									<label class="col-sm-4 control-label" for="{{ field.id_for_label }}">
+          											{{ field.label }}
+          									</label>
+          						<div class="col-md-6 cnt-inpt">
+          							{{ field|addcss:"form-control" }}
+          							<div class="text-muted pull-right">
+          													<small>{{ field.help_text }}</small>
+          											</div> <!-- form-group -->
+          											<span class="help-block">
+          													{% for error in field.errors %} {{error }} {% endfor %}
+          											</span> <!-- help-block -->
+          									</div> <!-- col-sm-4 -->
+          					</div>
+          					{% endfor %}
+          							{% for hidden in user_form.hidden_fields %} {{ hidden }} {% endfor %}
 
-                <fieldset>
-
-                    <div class="row" style="text-align: center">
-
-                        <div class="center-block profile-img">
-
-                                <span class="fa-stack fa-4x">
-
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-
-                                    <i class="fa fa-user fa-stack-1x" style="color:#eee;"></i>
-
-                                </span>
-
-                        </div> <!-- center-block -->
-
-                    </div> <!-- row -->
-
-                    <div class="row">
-
-                        <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-
-                            <div class="form-group {% if form.username.errors %}has-error{% endif %}">
-
-                                <div class="input-group">
-
-                                        <span class="input-group-addon">
-
-                                            <i class="fa fa-envelope"></i>
-
-                                        </span>
-
-                                    <input class="form-control" placeholder="Email Address"  name="username" type="email" autofocus>
-
-                                </div> <!-- input-group -->
-
-                            </div> <!-- form-group -->
-
-                            <div class="form-group {% if form.password.errors %}has-error{% endif %}">
-
-                                <div class="input-group">
-
-                                        <span class="input-group-addon">
-
-                                            <i class="fa fa-expeditedssl"></i>
-
-                                        </span>
-
-                                    <input class="form-control" placeholder="Password" name="password" type="password">
-
-                                    <input type="hidden" name="next" value="{{ next }}" />
-
-                                </div> <!-- input-group-addon -->
-
-                            </div> <!-- input-group --> <br>
-
-                            {% if form.errors %}
-
-                                <div class="alert alert-danger">
-
-                                    <i class="fa fa-warning"></i> "Your username and password didn't match. Please try again."
-
-                                </div> <!-- alert alert-danger -->
-
-                            {% endif %}
-
-                            <div class="form-group">
-
-                                <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginbutton" data-loading-text="Signing In...">Sign In <i class="fa fa-sign-in"></i></button>
-
-                            </div> <!-- form-group -->
-
-                        </div> <!-- col-sm-12 col-md-10 -->
-
-                    </div> <!-- row -->
-
-                </fieldset>
-
-            </form>
+          						<div class="form-group" style="text-align:center">
+          											 <a href="#tf-courses">
+														 <button type="submit" data-loading-text="Creating request..."
+																 class="btn btn-success solution_buttons">Create Request <i class="fa fa-angle-double-right"></i> </button></a>
+          							 </div> <!-- form-group -->
+          					 </fieldset>
+          				 </form>
 
         </div> <!-- panel-body -->
 

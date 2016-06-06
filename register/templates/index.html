@@ -34,5 +34,17 @@
 </nav>
 
 <div class="container">
-</div></body>
+</div>
+{% if request.user.is_anonymous %}
+    Nothing here:)
+{% else %}
+    <div class="container">
+    </div>
+    <div class="col-md-6 col-md-offset-5" style="padding-top:10%;">
+        <a href="{% url 'add_chocolate' %}">
+            <button class="btn btn-primary">Add a chocolate</button>
+        </a>
+    </div>
+{% endif %}
+</body>
 </html>
