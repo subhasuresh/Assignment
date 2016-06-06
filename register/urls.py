@@ -6,5 +6,7 @@ urlpatterns = [
     url(r'^user/$', UserRegistrationView.as_view(), name='login'),
     url(r'^user/success/', TemplateView.as_view(template_name='page.html'),
         name='page'),
-    url(r'^chocolate/add/',AddChocolateview.as_view(), name='add_chocolate')
+    url(r'^chocolate/add/',AddChocolateview.as_view(), name='add_chocolate'),
+    url(r'^chocolate/success/', TemplateView.as_view(template_name='success.html'),
+        name='bla'),
 ]
