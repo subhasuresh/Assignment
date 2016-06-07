@@ -9,4 +9,6 @@ urlpatterns = [
     url(r'^chocolate/add/',AddChocolateview.as_view(), name='add_chocolate'),
     url(r'^chocolate/success/', TemplateView.as_view(template_name='success.html'),
         name='bla'),
-]
+
+    url( r'^chocolate/info/(?P<choco_id>\d+)/$', ChocolateDetailsView.as_view(), name="chocolate_info")
+    ]
